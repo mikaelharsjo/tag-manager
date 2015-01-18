@@ -1,0 +1,30 @@
+{
+  "name": "tag-manager",
+  "version": "0.0.0",
+  "authors": [
+    "Mikael Härsjö <mikaelharsjo@gmail.com>"
+  ],
+  "description": "Element for tagging.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "tagging"
+  ],
+  "main": "tag-manager.html",
+  "license": "MIT",
+  "homepage": "https://github.com/mikaelharsjo/tag-manager/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.2",
+    "paper-shadow": "Polymer/paper-shadow#~0.5.2",
+    "core-elements": "Polymer/core-elements#~0.5.2",
+    "core-input": "Polymer/core-input#~0.5.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^2.0.5"
+  }
+}

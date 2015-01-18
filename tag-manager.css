@@ -1,0 +1,20 @@
+:host {
+  display: block;
+}
+
+/* To ensure your styling works under the Shadow DOM polyfill, see
+   www.polymer-project.org/docs/polymer/styling.html#directives */
+polyfill-next-selector { content: ':host > h2'; }
+::content h2 {
+  color: blue;
+}
+
+:host paper-shadow {
+  margin-right: 8px;
+  float: left;
+  padding: 4px;
+}
+
+:host input {
+  height: 26px;
+}

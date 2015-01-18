@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>tag-manager</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../tag-manager.html">
+</head>
+<body>
+
+  <!-- You use the document as a place to set up your fixtures. -->
+  <tag-manager></tag-manager>
+
+  <script>
+    var myEl = document.querySelector('tag-manager');
+
+    suite('<tag-manager>', function() {
+
+      test('defines the "tags" property', function() {
+        console.log('asssert', assert);
+        assert.deepEqual(myEl.tags, []);
+      });
+
+    });
+  </script>
+
+</body>
+</html>

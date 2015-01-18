@@ -1,0 +1,54 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-shadow/paper-shadow.html">
+<link rel="import" href="../core-input/core-input.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <tag-manager></tag-manager>
+
+@element tag-manager
+@blurb Element for tagging.
+@status alpha
+@homepage http://mikaelharsjo.github.io/tag-manager
+-->
+<polymer-element name="tag-manager" attributes="notitle author tags">
+
+  <template>
+
+    <link rel="stylesheet" href="tag-manager.css">
+
+    <template repeat="{{tag in tags}}">
+        <paper-shadow z="1">{{tag}}</paper-shadow>
+    </template>
+
+    <input is="core-input" id="input" placeholder="add tag" on-blur="{{onBlur}}">
+
+  </template>
+
+  <script>
+
+    Polymer({
+      /**
+      * The `tags` attribute sets initial tags
+      *
+      * @attribute tags
+      * @type array
+      */
+      tags: [],
+
+      ready: function() {
+      },
+
+      onBlur: function() {
+        this.tags.push(this.$.input.value);
+        this.$.input.value = '';
+      },
+
+    });
+
+  </script>
+
+</polymer-element>
