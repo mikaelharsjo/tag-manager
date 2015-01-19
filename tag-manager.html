@@ -24,7 +24,7 @@ Element providing solution to no problem in particular.
         <paper-shadow z="1">{{tag}}</paper-shadow>
     </template>
 
-    <input is="core-input" id="input" placeholder="add tag" on-blur="{{onBlur}}">
+    <input is="core-input" id="input" placeholder="add tag" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}">
 
   </template>
 
@@ -42,10 +42,20 @@ Element providing solution to no problem in particular.
       ready: function() {
       },
 
+      keypressHandler: function(event, detail, sender) {
+        if (event.keyCode === 13) {
+          this.addCurrentTag();
+        }
+      },
+
       onBlur: function() {
+        this.addCurrentTag();
+      },
+
+      addCurrentTag: function () {
         this.tags.push(this.$.input.value);
         this.$.input.value = '';
-      },
+      }
 
     });
 
