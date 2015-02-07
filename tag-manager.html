@@ -15,7 +15,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://mikaelharsjo.github.io/tag-manager
 -->
-<polymer-element name="tag-manager" attributes="notitle author tags">
+<polymer-element name="tag-manager" attributes="notitle author tags suggestions">
 
   <template>
 
@@ -25,7 +25,7 @@ Element providing solution to no problem in particular.
         <paper-shadow z="1">{{tag}}</paper-shadow>
     </template>
 
-    <typeahead-input hint="add tag" id="typeahead" on-typeahead-delimiter="{{more}}" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
+    <typeahead-input hint="add tag" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
     <div class="values">
       <template if="{{preview}}" repeat="{{data}}">
         <div selected="{{selected}}">
@@ -42,35 +42,25 @@ Element providing solution to no problem in particular.
 
     Polymer({
       /**
-      * The `tags` attribute sets initial tags
+      * The `tags` attribute sets the initial tags
       *
       * @attribute tags
       * @type array
+      * @default []
       */
       tags: [],
 
+      /**
+      * The `suggestions` attribute sets suggestions for the typeahead
+      *
+      * @attribute suggestions
+      * @type array
+      * @default []
+      */
+      suggestions: [],
+
       ready: function() {
-        this.$.typeahead.values = this.selectedValues;
-      },
-
-      data: [{
-        selected: true,
-        values: [
-        'apple',
-        'zebra',
-        'orange',
-        'yellow',
-        'awesome']
-      }],
-      selected: 0,
-
-      selectedChanged: function(old) {
-        this.data[old % 3].selected = false;
-        this.data[this.selected % 3].selected = true;
-      },
-
-      get selectedValues() {
-        return this.data[this.selected % 3].values;
+        this.$.typeahead.values = this.suggestions;
       },
 
       keypressHandler: function(event, detail, sender) {
