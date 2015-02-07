@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-shadow/paper-shadow.html">
 <link rel="import" href="../core-input/core-input.html">
+<link rel="import" href="../typeahead-input/typeahead-input.html">
 
 <!--
 Element providing solution to no problem in particular.
@@ -24,7 +25,16 @@ Element providing solution to no problem in particular.
         <paper-shadow z="1">{{tag}}</paper-shadow>
     </template>
 
-    <input is="core-input" id="input" placeholder="add tag" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}">
+    <typeahead-input hint="add tag" id="typeahead" on-typeahead-delimiter="{{more}}" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
+    <div class="values">
+      <template if="{{preview}}" repeat="{{data}}">
+        <div selected="{{selected}}">
+          <template repeat="{{values}}">
+            {{}}<br>
+          </template>
+        </div>
+      </template>
+    </div>
 
   </template>
 
@@ -40,6 +50,27 @@ Element providing solution to no problem in particular.
       tags: [],
 
       ready: function() {
+        this.$.typeahead.values = this.selectedValues;
+      },
+
+      data: [{
+        selected: true,
+        values: [
+        'apple',
+        'zebra',
+        'orange',
+        'yellow',
+        'awesome']
+      }],
+      selected: 0,
+
+      selectedChanged: function(old) {
+        this.data[old % 3].selected = false;
+        this.data[this.selected % 3].selected = true;
+      },
+
+      get selectedValues() {
+        return this.data[this.selected % 3].values;
       },
 
       keypressHandler: function(event, detail, sender) {
@@ -53,8 +84,9 @@ Element providing solution to no problem in particular.
       },
 
       addCurrentTag: function () {
-        this.tags.push(this.$.input.value);
-        this.$.input.value = '';
+        this.tags.push(this.$.typeahead.input);
+        this.$.typeahead.$.input.value = '';
+        this.$.typeahead.$.hint.value = 'add tag';
       }
 
     });
