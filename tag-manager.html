@@ -22,7 +22,7 @@ Element providing solution to no problem in particular.
     <link rel="stylesheet" href="tag-manager.css">
 
     <template repeat="{{tag in tags}}">
-        <paper-shadow z="1">{{tag}}</paper-shadow>
+      <paper-shadow z="1">{{tag}}</paper-shadow>
     </template>
 
     <typeahead-input hint="add tag" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
