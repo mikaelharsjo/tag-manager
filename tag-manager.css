@@ -9,10 +9,6 @@
   padding: 5px;
 }
 
-:host input {
-  height: 26px;
-}
-
 .values > div {
   display: inline-block;
   padding: 5px;
@@ -33,4 +29,5 @@ typeahead-input {
   background-color: transparent;
   border: 0;
   outline: none;
+  margin-bottom: 8px;
 }
