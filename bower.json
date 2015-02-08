@@ -22,7 +22,8 @@
     "polymer": "Polymer/polymer#^0.5.2",
     "paper-shadow": "Polymer/paper-shadow#~0.5.2",
     "core-elements": "Polymer/core-elements#~0.5.2",
-    "core-input": "Polymer/core-input#~0.5.2"
+    "core-input": "Polymer/core-input#~0.5.2",
+    "typeahead-input": "Polymer/typeahead-input#~0.5.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^2.0.5"

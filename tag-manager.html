@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-shadow/paper-shadow.html">
 <link rel="import" href="../core-input/core-input.html">
+<link rel="import" href="../typeahead-input/typeahead-input.html">
 
 <!--
 Element providing solution to no problem in particular.
@@ -14,7 +15,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://mikaelharsjo.github.io/tag-manager
 -->
-<polymer-element name="tag-manager" attributes="notitle author tags">
+<polymer-element name="tag-manager" attributes="notitle author tags suggestions">
 
   <template>
 
@@ -24,7 +25,16 @@ Element providing solution to no problem in particular.
         <paper-shadow z="1">{{tag}}</paper-shadow>
     </template>
 
-    <input is="core-input" id="input" placeholder="add tag" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}">
+    <typeahead-input hint="add tag" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
+    <div class="values">
+      <template if="{{preview}}" repeat="{{data}}">
+        <div selected="{{selected}}">
+          <template repeat="{{values}}">
+            {{}}<br>
+          </template>
+        </div>
+      </template>
+    </div>
 
   </template>
 
@@ -32,14 +42,25 @@ Element providing solution to no problem in particular.
 
     Polymer({
       /**
-      * The `tags` attribute sets initial tags
+      * The `tags` attribute sets the initial tags
       *
       * @attribute tags
       * @type array
+      * @default []
       */
       tags: [],
 
+      /**
+      * The `suggestions` attribute sets suggestions for the typeahead
+      *
+      * @attribute suggestions
+      * @type array
+      * @default []
+      */
+      suggestions: [],
+
       ready: function() {
+        this.$.typeahead.values = this.suggestions;
       },
 
       keypressHandler: function(event, detail, sender) {
@@ -53,8 +74,9 @@ Element providing solution to no problem in particular.
       },
 
       addCurrentTag: function () {
-        this.tags.push(this.$.input.value);
-        this.$.input.value = '';
+        this.tags.push(this.$.typeahead.input);
+        this.$.typeahead.$.input.value = '';
+        this.$.typeahead.$.hint.value = 'add tag';
       }
 
     });
