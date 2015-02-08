@@ -15,17 +15,17 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://mikaelharsjo.github.io/tag-manager
 -->
-<polymer-element name="tag-manager" attributes="notitle author tags suggestions">
+<polymer-element name="tag-manager" attributes="tags suggestions tagClass">
 
   <template>
 
     <link rel="stylesheet" href="tag-manager.css">
 
     <template repeat="{{tag in tags}}">
-      <paper-shadow z="1">{{tag}}</paper-shadow>
+      <paper-shadow z="1" class="{{tagClass}}">{{tag}}</paper-shadow>
     </template>
 
-    <typeahead-input hint="add tag" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
+    <typeahead-input hint="+" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
     <div class="values">
       <template if="{{preview}}" repeat="{{data}}">
         <div selected="{{selected}}">
@@ -59,6 +59,15 @@ Element providing solution to no problem in particular.
       */
       suggestions: [],
 
+      /**
+      * The `tag-class` attribute sets suggestions for the typeahead
+      *
+      * @attribute tagClass
+      * @type string
+      * @default ''
+      */
+      tagClass: '',
+
       ready: function() {
         this.$.typeahead.values = this.suggestions;
       },
@@ -76,7 +85,7 @@ Element providing solution to no problem in particular.
       addCurrentTag: function () {
         this.tags.push(this.$.typeahead.input);
         this.$.typeahead.$.input.value = '';
-        this.$.typeahead.$.hint.value = 'add tag';
+        this.$.typeahead.$.hint.value = '+';
       }
 
     });
