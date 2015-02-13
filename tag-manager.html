@@ -78,12 +78,19 @@ Element providing solution to no problem in particular.
         }
       },
 
-      onBlur: function() {
+      onBlur: function(event, detail, sender) {
         this.addCurrentTag();
       },
 
       addCurrentTag: function () {
-        this.tags.push(this.$.typeahead.input);
+        var input = this.$.typeahead.input;
+        var matches = this.suggestions.filter(function (suggestion) {
+          if (suggestion.substring(0, input.length) === input) {
+            return suggestion;
+          }
+        });
+        input = matches.length > 0 ? matches[0] : input;
+        this.tags.push(input);
         this.$.typeahead.$.input.value = '';
         this.$.typeahead.$.hint.value = '+';
       }
