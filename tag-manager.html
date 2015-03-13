@@ -14,7 +14,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://mikaelharsjo.github.io/tag-manager
 -->
-<polymer-element name="tag-manager" attributes="tags suggestions tagClass readOnly">
+<polymer-element name="tag-manager" attributes="tags suggestions tagClass readOnly hint">
 
   <template>
 
@@ -24,7 +24,7 @@ Element providing solution to no problem in particular.
       <paper-shadow z="1" class="{{tagClass}}">{{tag}}</paper-shadow>
     </template>
 
-    <typeahead-input hint="+" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
+    <typeahead-input hint="{{hint}}" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
     <div class="values">
       <template if="{{preview}}" repeat="{{data}}">
         <div selected="{{selected}}">
@@ -76,8 +76,20 @@ Element providing solution to no problem in particular.
       */
       readonly: false,
 
+      /**
+      * The `hint` attribute sets the text that enables adding of tags
+      *
+      * @attribute hint
+      * @type string
+      * @default '+'
+      */
+      hint: '+',
+
       ready: function() {
         this.$.typeahead.values = this.suggestions;
+        if (this.readonly) {
+          this.hint = '';
+        }
       },
 
       keypressHandler: function(event, detail, sender) {
