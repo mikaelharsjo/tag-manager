@@ -14,7 +14,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://mikaelharsjo.github.io/tag-manager
 -->
-<polymer-element name="tag-manager" attributes="tags suggestions tagClass">
+<polymer-element name="tag-manager" attributes="tags suggestions tagClass readOnly">
 
   <template>
 
@@ -66,6 +66,15 @@ Element providing solution to no problem in particular.
       * @default ''
       */
       tagClass: '',
+
+      /**
+      * The `readonly` attribute disables adding of tags
+      *
+      * @attribute readonly
+      * @type boolean
+      * @default false
+      */
+      readonly: false,
 
       ready: function() {
         this.$.typeahead.values = this.suggestions;
