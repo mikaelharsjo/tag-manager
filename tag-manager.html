@@ -14,7 +14,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://mikaelharsjo.github.io/tag-manager
 -->
-<polymer-element name="tag-manager" attributes="tags suggestions tagClass readOnly hint">
+<polymer-element name="tag-manager" attributes="tags suggestions tagClass readonly hint">
 
   <template>
 
@@ -23,8 +23,8 @@ Element providing solution to no problem in particular.
     <template repeat="{{tag in tags}}">
       <paper-shadow z="1" class="{{tagClass}}">{{tag}}</paper-shadow>
     </template>
-
-    <typeahead-input hint="{{hint}}" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
+    
+    <typeahead-input hidden?="{{readonly}}" hint="{{hint}}" id="typeahead" on-blur="{{onBlur}}" on-keypress="{{keypressHandler}}"></typeahead-input>
     <div class="values">
       <template if="{{preview}}" repeat="{{data}}">
         <div selected="{{selected}}">
